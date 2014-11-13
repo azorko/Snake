@@ -9,12 +9,30 @@
     this.board = newBoard;
     this.setupBoard(20);
     this.bindEvents();
-    window.setInterval(that.step.bind(that), 500);
+    this.addApples();
+    this.intervalId = window.setInterval(that.step.bind(that), 200);
+    this.appleId = window.setInterval(that.addApples.bind(that), 8000);
   };
   
+  View.prototype.addApples = function() {
+    var numApples = Math.floor(Math.random() * 4) + 1;
+    for (var i=0; i< numApples; i++) {
+      var xCoord = Math.floor(Math.random()*20);
+      var yCoord = Math.floor(Math.random()*20);
+      $apple = $("[data-pos='" + xCoord + "," + yCoord + "']");
+      $apple.addClass("apple");
+    }
+  };
 
   View.prototype.step = function() {
-    this.board.snake.move();
+    if (this.board.snake.isDead()) {
+      clearInterval(this.intervalId);
+      clearInterval(this.appleId);
+      alert("You lost!");
+    } else {
+      this.board.snake.move();
+      this.updateScore();
+    }
   };
   
   View.prototype.bindEvents = function () {
@@ -45,6 +63,14 @@
        $outerDiv.append($innerDiv);
      }
     }
+  };
+  
+  View.prototype.updateScore = function () {
+    var score = this.board.snake.segments.length;
+    var scoreString = "Score: "
+    var $scoreDiv = $("<div>" + "Score: " + score + "</div>");
+    $scoreDiv.addClass("score");
+    this.$el.append($scoreDiv);
   };
 
   

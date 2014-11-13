@@ -1,3 +1,26 @@
 .snake {
   background-color: green;
 }
+
+.apple {
+  background-color: red;
+}
+
+body {
+  margin-left: 35%;
+}
+
+.score {
+  font-size: 20px;
+  height: 20px;
+  width: 100px;
+  border: 3px solid blue;
+  background-color: white;
+  position: absolute;
+  text-align: center;
+  padding: 10px;
+  top: 10px;
+  left: 10px;
+  font-family: arial;
+  font-weight: bold;
+}

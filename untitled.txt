@@ -1,0 +1,15 @@
+    var head_pos = this.segments[0].slice();
+    var tail_pos = this.segments.pop();
+    var $head = $("[data-pos='" + head_pos + "']");
+    if ($head.hasClass("apple")) {
+      $head.removeClass("apple");
+    } else {
+      var $tail = $("[data-pos='" + tail_pos + "']"); //data-pos=[0, 1]
+      $tail.removeClass("snake");
+    }
+    
+    var coordDelta = coordChange(this.dir);
+    head_pos[0] += coordDelta[0];
+    head_pos[1] += coordDelta[1];
+    this.segments.unshift(head_pos);
+    $head.addClass("snake");
