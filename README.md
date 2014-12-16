@@ -1,4 +1,4 @@
-Main Project: Snake
+Project: Snake
 
 Focus:
 
